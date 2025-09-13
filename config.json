@@ -1,0 +1,58 @@
+{
+  "target_processes": {
+    "claude": {
+      "patterns": ["claude", "claude-code", "claude_code"],
+      "log_locations": [
+        "~/.claude/logs/",
+        "/tmp/claude_*.log",
+        "~/.local/share/claude/"
+      ],
+      "conversation_patterns": {
+        "user": "User:\\s*(.*?)(?=Assistant:|$)",
+        "assistant": "Assistant:\\s*(.*?)(?=User:|$)"
+      }
+    },
+    "codex": {
+      "patterns": ["codex", "openai-codex", "github-copilot"],
+      "log_locations": [
+        "~/.codex/logs/",
+        "/tmp/codex_*.log",
+        "~/.local/share/codex/"
+      ],
+      "conversation_patterns": {
+        "user": ">>>\\s*(.*?)(?=<<<|$)",
+        "assistant": "<<<\\s*(.*?)(?=>>>|$)"
+      }
+    },
+    "trae": {
+      "patterns": ["trae", "trae-ai"],
+      "log_locations": [
+        "~/.trae/logs/",
+        "/tmp/trae_*.log",
+        "~/.local/share/trae/"
+      ],
+      "conversation_patterns": {
+        "user": "Input:\\s*(.*?)(?=Output:|$)",
+        "assistant": "Output:\\s*(.*?)(?=Input:|$)"
+      }
+    }
+  },
+  "monitoring": {
+    "check_interval_seconds": 2,
+    "output_directory": "ai_sessions",
+    "max_log_file_size_mb": 100,
+    "cleanup_old_logs_days": 30
+  },
+  "output_formats": {
+    "json": true,
+    "txt": true,
+    "csv": false,
+    "markdown": false
+  },
+  "logging": {
+    "level": "INFO",
+    "file": "ai_sessions/monitor.log",
+    "console": true,
+    "max_file_size_mb": 10
+  }
+}
